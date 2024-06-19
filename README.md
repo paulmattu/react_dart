@@ -72,3 +72,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 ## Kleines Update
+
+https://github.com/gitname/react-gh-pages
+$ npm run deploy
+$ npm run deploy -- -m "Deploy React app to GitHub Pages"

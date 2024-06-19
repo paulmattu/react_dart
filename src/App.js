@@ -4,8 +4,9 @@ import PageNotFound from "./components/PageNotFound";
 import HomePage from "./components/HomePage";
 
 function App() {
+  const basename = process.env.REACT_APP_BASENAME || '';
   return (
-    <Router basename="/react_dart/">
+    <Router basename={basename}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<GameDashboard />} />
