@@ -1,13 +1,15 @@
 {
   "files": {
     "main.css": "/react_dart/static/css/main.8f33b6e9.css",
-    "main.js": "/react_dart/static/js/main.cb36812b.js",
+    "main.js": "/react_dart/static/js/main.aa2fcc3a.js",
+    "static/js/289.63e8030d.chunk.js": "/react_dart/static/js/289.63e8030d.chunk.js",
     "index.html": "/react_dart/index.html",
     "main.8f33b6e9.css.map": "/react_dart/static/css/main.8f33b6e9.css.map",
-    "main.cb36812b.js.map": "/react_dart/static/js/main.cb36812b.js.map"
+    "main.aa2fcc3a.js.map": "/react_dart/static/js/main.aa2fcc3a.js.map",
+    "289.63e8030d.chunk.js.map": "/react_dart/static/js/289.63e8030d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8f33b6e9.css",
-    "static/js/main.cb36812b.js"
+    "static/js/main.aa2fcc3a.js"
   ]
 }
