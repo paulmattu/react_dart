@@ -5,7 +5,6 @@ import DartDashboard from "./components/DartDashboard";
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
-  const [website, setWebsite] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
 
   useEffect(() => {
@@ -16,7 +15,7 @@ export default function Account({ session }) {
 
       const { data, error } = await supabase
         .from("profiles")
-        .select(`username, website, avatar_url`)
+        .select(`username, avatar_url`)
         .eq("id", user.id)
         .single();
 
@@ -24,8 +23,9 @@ export default function Account({ session }) {
         if (error) {
           console.warn(error);
         } else if (data) {
+          console.log(session)
+          console.log(session.user.id)
           setUsername(data.username);
-          setWebsite(data.website);
           setAvatarUrl(data.avatar_url);
         }
       }
@@ -49,7 +49,6 @@ export default function Account({ session }) {
     const updates = {
       id: user.id,
       username,
-      website,
       avatar_url: avatarUrl,
       updated_at: new Date(),
     };
@@ -70,7 +69,7 @@ export default function Account({ session }) {
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="username">Name</label>
         <input
           id="username"
@@ -79,18 +78,9 @@ export default function Account({ session }) {
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="url"
-          value={website || ""}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         <button
           className="button block primary"
           type="submit"
@@ -98,7 +88,7 @@ export default function Account({ session }) {
         >
           {loading ? "Loading ..." : "Update"}
         </button>
-      </div>
+      </div> */}
 
       <div>
         <button

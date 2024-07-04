@@ -1,55 +1,48 @@
 import React, { useRef, useState } from "react";
-import Keyboard from "react-simple-keyboard";
-import "react-simple-keyboard/build/css/index.css";
+import DartPlay from "./darts/DartPlay";
 
 function DartDashboard() {
-  const [input, setInput] = useState("");
-  const [layout, setLayout] = useState("default");
-  const keyboard = useRef();
+  const [play, setPlay] = useState(false);
+  // State to manage the list of players
+  const [players, setPlayers] = useState([]);
+  const [playerName, setPlayerName] = useState("");
+  console.log(players)
 
-  const onChange = (input) => {
-    setInput(input);
-    console.log("Input changed", input);
+  // Event handler to add a player to the list
+  const addPlayer = () => {
+    if (playerName.trim()) {
+      setPlayers([...players, playerName]);
+      setPlayerName(""); // Clear the input after adding the player
+    }
   };
+  const removeLastPlayer = () => {
+    setPlayers(players.slice(0, -1));
 
-  const handleShift = () => {
-    const newLayoutName = layout === "default" ? "shift" : "default";
-    setLayout(newLayoutName);
-  };
-
-  const onKeyPress = (button) => {
-    console.log("Button pressed", button);
-
-    /**
-     * If you want to handle the shift and caps lock buttons
-     */
-    if (button === "{Double}" || button === "{Triple}") handleShift();
-  };
-
-  const onChangeInput = (event) => {
-    const input = event.target.value;
-    setInput(input);
-    keyboard.current.setInput(input);
   };
 
   return (
     <div>
-      <p>DartDashboard</p>
-
-      <input
-        value={input}
-        placeholder={"Tap on the virtual keyboard to start"}
-        onChange={onChangeInput}
-      />
-      <Keyboard
-        keyboardRef={(r) => (keyboard.current = r)}
-        layoutName={layout}
-        layout={{
-            default: ["1 2 3 4 5 6 7", "8 9 10 11 12 13 14", "15 16 17 18 19 20 25", "0 Double Triple {backspace}"]
-          }}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
-      />
+      {!play ? (
+        <div>
+          <p>DartDashboard</p>
+          <h1>Player List</h1>
+          <input
+            type="text"
+            value={playerName}
+            onChange={(e) => setPlayerName(e.target.value)}
+            placeholder="Enter player name"
+          />
+          <button onClick={addPlayer}>Add Player</button>
+          <button onClick={removeLastPlayer}>Remove Last Player</button>
+          <ul>
+            {players.map((player, index) => (
+              <li key={index}>{player}</li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <DartPlay />
+      )}
     </div>
   );
 }
