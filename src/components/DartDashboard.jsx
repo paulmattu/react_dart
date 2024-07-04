@@ -1,23 +1,30 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import DartPlay from "./darts/DartPlay";
+import PlayerCard from "./darts/PlayerCard";
 
 function DartDashboard() {
   const [play, setPlay] = useState(false);
   // State to manage the list of players
   const [players, setPlayers] = useState([]);
   const [playerName, setPlayerName] = useState("");
-  console.log(players)
+
+  console.log("Players State:", players);
 
   // Event handler to add a player to the list
   const addPlayer = () => {
+    console.log("Add Player Called");
     if (playerName.trim()) {
-      setPlayers([...players, playerName]);
-      setPlayerName(""); // Clear the input after adding the player
+      const newPlayer = { name: playerName, score: 0, throws: [] };
+      console.log("New Player:", newPlayer);
+      setPlayers([...players, newPlayer]);
+      setPlayerName(""); // Clear the name input after adding the player
+    } else {
+      console.log("Invalid Input for Player");
     }
   };
+
   const removeLastPlayer = () => {
     setPlayers(players.slice(0, -1));
-
   };
 
   return (
@@ -33,10 +40,15 @@ function DartDashboard() {
             placeholder="Enter player name"
           />
           <button onClick={addPlayer}>Add Player</button>
-          <button onClick={removeLastPlayer}>Remove Last Player</button>
+          <button onClick={removeLastPlayer} disabled={players.length === 0}>
+            Remove Last Player
+          </button>
+
           <ul>
             {players.map((player, index) => (
-              <li key={index}>{player}</li>
+              <li key={index}>
+                <PlayerCard index={index} player={player} />
+              </li>
             ))}
           </ul>
         </div>
